@@ -1,0 +1,4 @@
+build/*
+buildCurrent/*
+node_modules/*
+public/* 
