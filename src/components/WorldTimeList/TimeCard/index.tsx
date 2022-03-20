@@ -1,34 +1,14 @@
 import { FC } from 'react'
-import styled from 'styled-components'
 
 import useGetTimeZoneDetails from '../../../hooks/useGetTimeZoneDetails'
 import useDateFormatted from '../../../hooks/useDateFormatted'
 import useGetCurrentDate from '../../../hooks/useGetCurrentDate'
 
-import { Card } from '../_common/style'
+import { getCityNameFromTimeZone } from '../../../helpers'
+
 import { RESIDENCE_TIMEZONE } from '../../../constants'
 
-const TimeCardWrapper = styled(Card)`
-  .city-name {
-    font-size: 20px;
-    &.margin-bottom-14 {
-      margin-bottom: 14px;
-    }
-  }
-  .label {
-    font-size: 12px;
-  }
-  .time {
-    font-size: 40px;
-    margin: 40px 0;
-  }
-  .timezone {
-    font-size: 16px;
-  }
-  .time-diff {
-    font-size: 12px;
-  }
-`
+import { TimeCardWrapper } from './styles'
 
 const getDiffTimeText = (time1: string, time2: string) => {
   const time1Number = Number(time1.split(':')[0])
@@ -43,24 +23,24 @@ interface ITimeCard {
 }
 
 const TimeCard: FC<ITimeCard> = ({ time }) => {
-  const { data, isLoading, isError } = useGetTimeZoneDetails({
+  const { data, isLoading } = useGetTimeZoneDetails({
     timeZone: time.timeZone,
   })
-  const cityName = data?.timezone.split('/')[1].replace('_', ' ')
-  const { date } = useGetCurrentDate()
+  const date = useGetCurrentDate()
   const timeFormatted = useDateFormatted(date, data?.timezone)
   const residenceTime = useDateFormatted(date, RESIDENCE_TIMEZONE)
   const diffTimeText = getDiffTimeText(residenceTime, timeFormatted)
-  const residence = RESIDENCE_TIMEZONE.split('/')[1]
+  const residence = getCityNameFromTimeZone(RESIDENCE_TIMEZONE)
+  const cityName = getCityNameFromTimeZone(data?.timezone || '')
 
   if (isLoading) {
     return <p>Loading TimeZone...</p>
   }
-  if (!data || isError) return null
+  if (!data) return null
 
   return (
     <TimeCardWrapper>
-      <div className={`city-name ${!time.label && 'margin-bottom-14'}`}>
+      <div className={`city-name ${!time.label && 'margin-bottom-18'}`}>
         {cityName}
       </div>
       <div className="label">{time.label}</div>

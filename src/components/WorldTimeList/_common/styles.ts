@@ -9,4 +9,5 @@ export const Card = styled.div`
   border-radius: 4px;
   text-align: center;
   padding: 10px 0;
+  background-color: rgba(255, 255, 255, 0.1);
 `

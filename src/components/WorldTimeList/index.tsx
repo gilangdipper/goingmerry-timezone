@@ -1,33 +1,9 @@
 import { FC, useCallback, useState } from 'react'
-import styled from 'styled-components'
+
 import AddCard from './AddCard'
 import TimeCard from './TimeCard'
 
-const TimeListWrapper = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  width: 100%;
-
-  .time {
-    flex: 0 0 calc(25% - 20px);
-    padding: 0 10px;
-    position: relative;
-
-    .delete-time {
-      display: none;
-      position: absolute;
-      top: -8px;
-      right: 2px;
-      cursor: pointer;
-    }
-
-    &:hover {
-      .delete-time {
-        display: block;
-      }
-    }
-  }
-`
+import { TimeListWrapper } from './styles'
 
 const WorldTimeList: FC = () => {
   const [timeList, setTimeList] = useState([

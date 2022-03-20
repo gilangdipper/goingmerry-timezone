@@ -15,5 +15,5 @@ export default function useGetCurrentDate() {
     }
   }, [])
 
-  return { date }
+  return date
 }

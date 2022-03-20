@@ -1,41 +1,8 @@
 import { FC, useMemo, useState } from 'react'
-import styled from 'styled-components'
-import { Card } from '../_common/style'
+
 import Select from './Select'
 
-const AddCardWrapper = styled(Card)`
-  height: calc(100% - 20px);
-
-  .section {
-    display: flex;
-    flex-direction: column;
-    padding: 0 10px;
-    margin-bottom: 20px;
-
-    .label {
-      font-size: 14px;
-      margin-bottom: 4px;
-    }
-
-    > input {
-      padding: 4px;
-      border-radius: 4px;
-      border: 1px solid #000;
-
-      &::placeholder {
-        font-style: italic;
-        color: #999;
-      }
-    }
-
-    > button {
-      width: 100%;
-      border-radius: 4px;
-      border: 1px solid #000;
-      padding: 4px;
-    }
-  }
-`
+import { AddCardWrapper } from './styles'
 
 const CITY_LIST = [
   { name: 'Singapore', value: 'Asia/Singapore' },
@@ -56,6 +23,7 @@ interface IAddCard {
 }
 
 const AddCard: FC<IAddCard> = ({ addTimeList, timeList }) => {
+  const [showAddForm, setShowAddForm] = useState(false)
   const [city, setCity] = useState('')
   const [label, setLabel] = useState('')
   const options = useMemo(() => {
@@ -65,32 +33,49 @@ const AddCard: FC<IAddCard> = ({ addTimeList, timeList }) => {
     )
     return cityListFiltered
   }, [timeList])
-  const handleSubmit = () => addTimeList(city, label)
+  const handleSubmit = () => {
+    addTimeList(city, label)
+    setShowAddForm(false)
+  }
 
   return (
     <AddCardWrapper>
-      <div className="section">
-        <div className="label">Select City</div>
-        <Select
-          options={options}
-          value={city}
-          onChange={(item) => setCity(item.value)}
-          placeholder="Select city"
-        />
-      </div>
-      <div className="section">
-        <div className="label">Label</div>
-        <input
-          type="text"
-          placeholder="Input label"
-          onChange={(e) => setLabel(e.target.value)}
-        />
-      </div>
-      <div className="section">
-        <button type="button" onClick={handleSubmit} disabled={!city}>
-          Add Time
-        </button>
-      </div>
+      {showAddForm ? (
+        <>
+          <div className="section">
+            <div className="label">Select City</div>
+            <Select
+              options={options}
+              value={city}
+              onChange={(item) => setCity(item.value)}
+              placeholder="Select city"
+            />
+          </div>
+          <div className="section">
+            <div className="label">Label</div>
+            <input
+              type="text"
+              placeholder="Input label"
+              onChange={(e) => setLabel(e.target.value)}
+            />
+          </div>
+          <div className="section">
+            <button type="button" onClick={handleSubmit} disabled={!city}>
+              Add time
+            </button>
+          </div>
+        </>
+      ) : (
+        <div className="section">
+          <button
+            type="button"
+            className="show-form"
+            onClick={() => setShowAddForm(true)}
+          >
+            +
+          </button>
+        </div>
+      )}
     </AddCardWrapper>
   )
 }
