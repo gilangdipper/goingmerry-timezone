@@ -47,7 +47,7 @@ const WorldTimeList = () => {
     <TimeListWrapper>
       {timeList.map((item) => (
         <div key={item.timeZone} className="time">
-          <TimeCard />
+          <TimeCard time={item} />
           <button
             type="button"
             className="delete-time"

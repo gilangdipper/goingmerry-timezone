@@ -65,7 +65,6 @@ const AddCard: FC<IAddCard> = ({ addTimeList, timeList }) => {
     )
     return cityListFiltered
   }, [timeList])
-
   const handleSubmit = () => addTimeList(city, label)
 
   return (
