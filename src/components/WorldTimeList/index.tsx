@@ -22,7 +22,7 @@ const WorldTimeList: FC = () => {
   return (
     <TimeListWrapper>
       {timeList.map((item) => (
-        <div key={item.timeZone} className="time">
+        <div key={item.timeZone} className="clock">
           <TimeCard time={item} />
           <button
             type="button"
@@ -34,7 +34,7 @@ const WorldTimeList: FC = () => {
         </div>
       ))}
       {showAddCard && (
-        <div className="time">
+        <div className="clock">
           <AddCard addTimeList={addTimeList} timeList={timeList} />
         </div>
       )}

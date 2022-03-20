@@ -6,10 +6,15 @@ export const TimeListWrapper = styled.div`
   width: 100%;
   justify-content: center;
 
-  .time {
+  .clock {
     flex: 0 0 calc(25% - 20px);
     padding: 0 10px;
     position: relative;
+
+    @media only screen and (max-width: 425px) {
+      flex: 0 0 calc(50% - 20px);
+      margin-bottom: 10px;
+    }
 
     .delete-time {
       display: none;
@@ -24,6 +29,10 @@ export const TimeListWrapper = styled.div`
       border: 0;
       font-size: 16px;
       padding: 2px 8px;
+
+      @media only screen and (max-width: 768px) {
+        display: block;
+      }
     }
 
     &:hover {
