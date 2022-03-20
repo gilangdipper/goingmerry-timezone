@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { FC, useCallback, useState } from 'react'
 import styled from 'styled-components'
 import AddCard from './AddCard'
 import TimeCard from './TimeCard'
@@ -29,7 +29,7 @@ const TimeListWrapper = styled.div`
   }
 `
 
-const WorldTimeList = () => {
+const WorldTimeList: FC = () => {
   const [timeList, setTimeList] = useState([
     { timeZone: 'Asia/Seoul', label: '' },
     { timeZone: 'Europe/Berlin', label: '' },

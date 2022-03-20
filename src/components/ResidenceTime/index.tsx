@@ -1,4 +1,8 @@
+import { FC } from 'react'
 import styled from 'styled-components'
+import { RESIDENCE_TIMEZONE } from '../../constants'
+import useDateFormatted from '../../hooks/useDateFormatted'
+import useGetCurrentDate from '../../hooks/useGetCurrentDate'
 
 const TimeWrapper = styled.div`
   display: flex;
@@ -16,11 +20,14 @@ const TimeWrapper = styled.div`
   }
 `
 
-const ResidenceTime = () => {
+const ResidenceTime: FC = () => {
+  const { date } = useGetCurrentDate()
+  const time = useDateFormatted(date, RESIDENCE_TIMEZONE)
+  const residence = RESIDENCE_TIMEZONE.split('/')[1]
   return (
     <TimeWrapper>
-      <div className="name">Jakarta</div>
-      <div className="time">09:00</div>
+      <div className="name">{residence}</div>
+      <div className="time">{time}</div>
     </TimeWrapper>
   )
 }
