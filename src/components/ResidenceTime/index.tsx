@@ -2,16 +2,15 @@ import { FC } from 'react'
 
 import { RESIDENCE_TIMEZONE } from '../../constants'
 
-import { getCityNameFromTimeZone } from '../../helpers'
+import { formatLocalTimeString, getCityNameFromTimeZone } from '../../helpers'
 
-import useDateFormatted from '../../hooks/useDateFormatted'
 import useGetCurrentDate from '../../hooks/useGetCurrentDate'
 
 import { TimeWrapper } from './styles'
 
 const ResidenceTime: FC = () => {
   const date = useGetCurrentDate()
-  const time = useDateFormatted(date, RESIDENCE_TIMEZONE)
+  const time = formatLocalTimeString(date, RESIDENCE_TIMEZONE)
   const residence = getCityNameFromTimeZone(RESIDENCE_TIMEZONE)
   return (
     <TimeWrapper>

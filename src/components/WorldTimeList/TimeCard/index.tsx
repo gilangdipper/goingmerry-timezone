@@ -1,10 +1,12 @@
 import { FC } from 'react'
 
 import useGetTimeZoneDetails from '../../../hooks/useGetTimeZoneDetails'
-import useDateFormatted from '../../../hooks/useDateFormatted'
 import useGetCurrentDate from '../../../hooks/useGetCurrentDate'
 
-import { getCityNameFromTimeZone } from '../../../helpers'
+import {
+  formatLocalTimeString,
+  getCityNameFromTimeZone,
+} from '../../../helpers'
 
 import { RESIDENCE_TIMEZONE } from '../../../constants'
 
@@ -27,8 +29,8 @@ const TimeCard: FC<ITimeCard> = ({ time }) => {
     timeZone: time.timeZone,
   })
   const date = useGetCurrentDate()
-  const timeFormatted = useDateFormatted(date, data?.timezone)
-  const residenceTime = useDateFormatted(date, RESIDENCE_TIMEZONE)
+  const timeFormatted = formatLocalTimeString(date, data?.timezone)
+  const residenceTime = formatLocalTimeString(date, RESIDENCE_TIMEZONE)
   const diffTimeText = getDiffTimeText(residenceTime, timeFormatted)
   const residence = getCityNameFromTimeZone(RESIDENCE_TIMEZONE)
   const cityName = getCityNameFromTimeZone(data?.timezone || '')
