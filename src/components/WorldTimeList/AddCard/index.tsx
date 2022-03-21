@@ -39,12 +39,13 @@ const AddCard: FC<IAddCard> = ({ addTimeList, timeList }) => {
   }
 
   return (
-    <AddCardWrapper>
+    <AddCardWrapper data-testid="add-card-wrapper">
       {showAddForm ? (
         <>
-          <div className="section">
+          <div className="section" data-testid="section-select-city">
             <div className="label">Select City</div>
             <Select
+              data-testid="select-city"
               options={options}
               value={city}
               onChange={(item) => setCity(item.value)}
@@ -54,13 +55,20 @@ const AddCard: FC<IAddCard> = ({ addTimeList, timeList }) => {
           <div className="section">
             <div className="label">Label</div>
             <input
+              aria-label="label-input"
               type="text"
               placeholder="Input label"
               onChange={(e) => setLabel(e.target.value)}
+              value={label}
             />
           </div>
           <div className="section">
-            <button type="button" onClick={handleSubmit} disabled={!city}>
+            <button
+              data-testid="button-submit"
+              type="button"
+              onClick={handleSubmit}
+              disabled={!city}
+            >
               Add time
             </button>
           </div>
@@ -68,6 +76,7 @@ const AddCard: FC<IAddCard> = ({ addTimeList, timeList }) => {
       ) : (
         <div className="section">
           <button
+            data-testid="button-show-form"
             type="button"
             className="show-form"
             onClick={() => setShowAddForm(true)}

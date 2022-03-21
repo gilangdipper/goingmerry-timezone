@@ -13,9 +13,13 @@ const ResidenceTime: FC = () => {
   const time = formatLocalTimeString(date, RESIDENCE_TIMEZONE)
   const residence = getCityNameFromTimeZone(RESIDENCE_TIMEZONE)
   return (
-    <TimeWrapper>
-      <div className="name">{residence}</div>
-      <div className="time">{time}</div>
+    <TimeWrapper data-testid="time-wrapper">
+      <div data-testid="time-name" className="name">
+        {residence}
+      </div>
+      <div data-testid="time" className="time">
+        {time}
+      </div>
     </TimeWrapper>
   )
 }

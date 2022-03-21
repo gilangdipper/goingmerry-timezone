@@ -41,7 +41,7 @@ const TimeCard: FC<ITimeCard> = ({ time }) => {
   if (!data) return null
 
   return (
-    <TimeCardWrapper>
+    <TimeCardWrapper data-testid="time-card-wrapper">
       <div className={`city-name ${!time.label && 'margin-bottom-18'}`}>
         {cityName}
       </div>
