@@ -58,7 +58,12 @@ const AddCard: FC<IAddCard> = ({ addTimeList, timeList }) => {
               aria-label="label-input"
               type="text"
               placeholder="Input label"
-              onChange={(e) => setLabel(e.target.value)}
+              onChange={(e) => {
+                const { value } = e.target
+                if (value.length <= 20) {
+                  setLabel(e.target.value)
+                }
+              }}
               value={label}
             />
           </div>
